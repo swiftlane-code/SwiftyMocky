@@ -134,7 +134,7 @@ public protocol StaticMock: AnyObject {
 
 /// Every mock, that stubs Actors, should adopt **ActorMock** protocol.
 /// It defines base Mock structure and features.
-@available(iOS 13.0, *)
+@available(iOS 13.0, macOS 12.0, tvOS 13.0, watchOS 6.0, *)
 public protocol ActorMock: Actor {
     /// Stubbed method and property type
     associatedtype Given

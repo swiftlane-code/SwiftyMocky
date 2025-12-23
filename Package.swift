@@ -1,10 +1,16 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "swiftymocky",
+    platforms: [
+        .macOS(.v14),
+        .iOS(.v13),
+        .tvOS(.v13),
+        .watchOS(.v6)
+    ],
     products: [
         // XCTest Runtime libraries
         .library(name: "SwiftyMocky", targets: ["SwiftyMocky"]),
@@ -14,12 +20,12 @@ let package = Package(
         .executable(name: "swiftymocky", targets: ["SwiftyMockyCLI"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/JohnSundell/ShellOut", .upToNextMajor(from: "2.3.0")),
-        .package(url: "https://github.com/tuist/xcodeproj", .upToNextMajor(from: "8.3.1")),
-        .package(url: "https://github.com/luoxiu/Chalk", .exact("0.2.1")),
-        .package(url: "https://github.com/kylef/Commander", .upToNextMajor(from: "0.9.1")),
-        .package(url: "https://github.com/kylef/PathKit", .upToNextMajor(from: "1.0.1")),
-        .package(url: "https://github.com/jpsim/Yams", .upToNextMajor(from: "5.0.1")),
+        .package(url: "https://github.com/JohnSundell/ShellOut", from: "2.3.0"),
+        .package(url: "https://github.com/tuist/xcodeproj", from: "8.3.1"),
+        .package(url: "https://github.com/luoxiu/Chalk", exact: "0.2.1"),
+        .package(url: "https://github.com/kylef/Commander", from: "0.9.1"),
+        .package(url: "https://github.com/kylef/PathKit", from: "1.0.1"),
+        .package(url: "https://github.com/jpsim/Yams", from: "5.0.1"),
     ],
     targets: [
         // XCTest Runtime libraries
@@ -59,7 +65,7 @@ let package = Package(
             dependencies: ["SwiftyMocky"]
         ),
         // CLI Executable
-        .target(
+        .executableTarget(
             name: "SwiftyMockyCLI",
             dependencies: [
                 "Commander",
@@ -72,7 +78,7 @@ let package = Package(
             dependencies: [
                 "ShellOut",
                 "Chalk",
-                "XcodeProj",
+                .product(name: "XcodeProj", package: "xcodeproj"),
                 "PathKit",
                 "Yams",
             ],
